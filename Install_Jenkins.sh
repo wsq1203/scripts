@@ -2,6 +2,7 @@
 
 . /etc/os-release
 
+HOST=`hostname -I|awk '{print $1}'`
 CPUS=`lscpu |awk '/^CPU\(s\)/{print $2}'`
 SRC_DIR="/usr/local/src"
 GREEN="echo -e \E[1;32m"

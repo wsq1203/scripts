@@ -70,10 +70,9 @@ Install_hub () {
             apt update
             apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
         fi
-    fi
 
-    mkdir -p /etc/docker
-    tee /etc/docker/daemon.json <<-'EOF'
+        mkdir -p /etc/docker
+        tee /etc/docker/daemon.json <<-'EOF'
 {
     "registry-mirrors": [
         "https://registry.docker-cn.com",
@@ -94,18 +93,33 @@ Install_hub () {
     "storage-driver": "overlay2"
 }
 EOF
-    systemctl daemon-reload
-    systemctl enable docker
-    systemctl restart docker
+        systemctl daemon-reload
+        systemctl enable docker
+        systemctl restart docker
+    fi
+
+    docker-compose -v &> /dev/null
+    if [ ${?} -ne 0 ];then
+        if [[ ${ID} =~ centos|rocky|rhel ]];then
+            yum install -y docker-compose
+        else
+	    apt update;apt install -y docker-compose
+        fi
+    fi
+
+
 
     cd ${SRC_DIR}
     if [ ! -e harbor-offline-installer-v${HUB_VERSION}.tgz ];then
         wget ${HUB_URL}/harbor-offline-installer-${HUB_VERSION}.tgz
         [ $? -ne 0  ] && { echo "文件下载失败"; exit; }
     fi
+    
+    if [ ! -e /usr/local/harbor ];then
+        tar xf harbor-offline-installer-v${HUB_VERSION}.tgz -C /usr/local/
+    fi
 
-    tar xf harbor-offline-installer-v${HUB_VERSION}.tgz -C /usr//
-    cd /usr/local/harbor/local
+    cd /usr/local/harbor/
     cp harbor.yml.tmpl harbor.yml
 
     sed -i "s/hostname: reg.mydomain.com/hostname: ${HOST}/g" harbor.yml 
