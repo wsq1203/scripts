@@ -12,9 +12,6 @@ KAFKA_URL="https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/${KAFKA_VERSION}/ka
 KAFKA_INSTALL_DIR=/usr/local/kafka
 
 NODE_ID=1
-KAFKA1_IP=10.0.0.11
-KAFKA1_IP=10.0.0.12
-KAFKA1_IP=10.0.0.13
 
 ZK1_IP=10.0.0.11
 ZK2_IP=10.0.0.12
@@ -54,7 +51,7 @@ Install_kafka () {
     fi
 
     tar xf ${SRC_DIR}/${KAFKA_URL##*/}  -C /usr/local/
-    ln -s ${KAFKA_INSTALL_DIR}_*/ ${KAFKA_INSTALL_DIR} && mkdir ${KAFKA_INSTALL_DIR}/data
+    ln -s ${KAFKA_INSTALL_DIR}_*/ ${KAFKA_INSTALL_DIR} && mkdir ${KAFKA_INSTALL_DIR}/logs
     echo PATH=${KAFKA_INSTALL_DIR}/bin:'$PATH' > /etc/profile.d/kafka.sh && . /etc/profile.d/kafka.sh
 
     cat > /lib/systemd/system/kafka.service <<EOF
@@ -79,7 +76,7 @@ EOF
     cat > ${KAFKA_INSTALL_DIR}/config/server.properties <<EOF
 broker.id=${NODE_ID}
 listeners=PLAINTEXT://${HOST}:9092
-log.dirs=${KAFKA_INSTALL_DIR}/data
+log.dirs=${KAFKA_INSTALL_DIR}/logs
 num.partitions=1
 log.retention.hours=168
 zookeeper.connect=${ZK1_IP}:2181,${ZK2_IP}:2181,${ZK3_IP}:2181

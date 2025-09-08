@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. /etc/os-release
+
 color () {
 
         RES_COL=50

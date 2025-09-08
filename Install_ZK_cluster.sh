@@ -62,13 +62,14 @@ Install_zk_cluster () {
 
     tar xf /usr/local/src/${ZK_URL##*/} -C /usr/local && ln -s /usr/local/apache-zookeeper-*-bin/ /usr/local/zookeeper
     echo "PATH=/usr/local/zookeeper/bin:\$PATH" >  /etc/profile.d/zookeeper.sh && .  /etc/profile.d/zookeeper.sh
-    mkdir -p /usr/local/zookeeper/data
+    mkdir -p /usr/local/zookeeper/{data,logs}
 
     cat > /usr/local/zookeeper/conf/zoo.cfg <<EOF
 tickTime=2000
 initLimit=10
 syncLimit=5
 dataDir=/usr/local/zookeeper/data
+dataLogDir=/usr/local/zookeeper/logs
 clientPort=2181
 maxClientCnxns=128
 autopurge.snapRetainCount=3

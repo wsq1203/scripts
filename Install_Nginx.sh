@@ -80,7 +80,7 @@ Install_nginx () {
     --with-http_stub_status_module --with-http_gzip_static_module --with-pcre \
     --with-stream --with-stream_ssl_module --with-stream_realip_module
     
-    make -j ${CPUS} && make install 
+    make -j ${CPUS} && make install
     
     ln -s ${NGINX_INSTALL_DIR} /usr/local/nginx
 
@@ -89,7 +89,7 @@ Install_nginx () {
     echo "PATH=/usr/local/nginx/sbin:${PATH}" > /etc/profile.d/nginx.sh
     chown -R nginx.nginx /usr/local/nginx
     
-    cat > /lib/systemd/system/nginx.service <<EOF
+    cat > /etc/systemd/system/nginx.service <<EOF
 [Unit]
 Description=The nginx HTTP and reverse proxy server
 After=network.target remote-fs.target nss-lookup.target

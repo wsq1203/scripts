@@ -39,114 +39,109 @@ baseurl=https://mirror.tuna.tsinghua.edu.cn/centos/$releasever/os/$basearch/
         https://mirrors.huaweicloud.com/centos/$releasever/os/$basearch/
         https://mirrors.cloud.tencent.com/centos/$releasever/os/$basearch/
         https://mirrors.aliyun.com/centos/$releasever/os/$basearch/
+        https://mirrors.163.com/centos/$releasever/os/$basearch/
 gpgcheck=0
 
 [extras]
 name=extras
-baseurl=https://mirror.tuna.tsinghua.edu.cn/centos/$releasever/extras/$basearch
-        https://mirrors.huaweicloud.com/centos/$releasever/extras/$basearch
-        https://mirrors.cloud.tencent.com/centos/$releasever/extras/$basearch
-        https://mirrors.aliyun.com/centos/$releasever/extras/$basearch       
+baseurl=https://mirror.tuna.tsinghua.edu.cn/centos/$releasever/extras/$basearch/
+        https://mirrors.huaweicloud.com/centos/$releasever/extras/$basearch/
+        https://mirrors.cloud.tencent.com/centos/$releasever/extras/$basearch/
+        https://mirrors.aliyun.com/centos/$releasever/extras/$basearch/
+        https://mirrors.163.com/centos/$releasever/extras/$basearch/       
 gpgcheck=0
 enabled=1
 
 [epel]
 name=EPEL
-baseurl=https://mirror.tuna.tsinghua.edu.cn/epel/$releasever/$basearch
+baseurl=https://mirror.tuna.tsinghua.edu.cn/epel/$releasever/$basearch/
         https://mirrors.cloud.tencent.com/epel/$releasever/$basearch/
-        https://mirrors.huaweicloud.com/epel/$releasever/$basearch 
-        https://mirrors.cloud.tencent.com/epel/$releasever/$basearch
-        http://mirrors.aliyun.com/epel/$releasever/$basearch
+        https://mirrors.huaweicloud.com/epel/$releasever/$basearch/ 
+        https://mirrors.aliyun.com/epel/$releasever/$basearch/
+        http://mirrors.163.com/epel/$releasever/extras/$basearch/
 gpgcheck=0
 enabled=1 ' > /etc/yum.repos.d/centos.repo
-        yum -y install sshpass bash-completion lrzsz  tree  wget tcpdump
-        yum -y install rsync vim lsof gcc make gcc-c++ glibc glibc-devel
+        yum -y install sshpass bash-completion lrzsz  tree  wget tcpdump tar zip
+        yum -y install rsync vim lsof gcc make gcc-c++ glibc glibc-devel unzip
         yum -y install pcre pcre-devel openssl openssl-devel systemd-devel
         yum -y install zlib-devel tmux tcpdump net-tools bc chrony
     elif [ ${ID} = rocky ];then
         mv /etc/yum.repos.d/* /mnt/
         echo '[BaseOS]
 name=BaseOS
-baseurl=https://mirrors.aliyun.com/rockylinux/$releasever/BaseOS/x86_64/os/
-        http://mirrors.163.com/rocky/$releasever/BaseOS/x86_64/os/
-        https://mirrors.nju.edu.cn/rocky/$releasever/BaseOS/x86_64/os/
-        https://mirrors.sjtug.sjtu.edu.cn/rocky/$releasever/BaseOS/x86_64/os/
-        http://mirrors.sdu.edu.cn/rocky/$releasever/BaseOS/x86_64/os/       
+baseurl=https://mirrors.aliyun.com/rockylinux/$releasever/BaseOS/$basearch/os/
+        https://mirrors.163.com/rocky/$releasever/BaseOS/$basearch/os/
+        https://mirrors.tuna.tsinghua.edu.cn/rocky/$releasever/BaseOS/$basearch/os/
+        https://mirrors.tencent.com/rocky/$releasever/BaseOS/$basearch/os/
+        https://mirrors.huaweicloud.com/rocky/$releasever/BaseOS/$basearch/os/
+        
 gpgcheck=0
 
 [AppStream]
 name=AppStream
-baseurl=https://mirrors.aliyun.com/rockylinux/$releasever/AppStream/x86_64/os/
-        http://mirrors.163.com/rocky/$releasever/AppStream/x86_64/os/
-        https://mirrors.nju.edu.cn/rocky/$releasever/AppStream/x86_64/os/
-        https://mirrors.sjtug.sjtu.edu.cn/rocky/$releasever/AppStream/x86_64/os/
-        http://mirrors.sdu.edu.cn/rocky/$releasever/AppStream/x86_64/os/
+baseurl=https://mirrors.aliyun.com/rockylinux/$releasever/AppStream/$basearch/os/
+        https://mirrors.163.com/rocky/$releasever/AppStream/$basearch/os/
+        https://mirrors.tuna.tsinghua.edu.cn/rocky/$releasever/AppStream/$basearch/os/
+        https://mirrors.tencent.com/rocky/$releasever/AppStream/$basearch/os/
+        https://mirrors.huaweicloud.com/rocky/$releasever/AppStream/$basearch/os/
 gpgcheck=0
 
 [extras]
 name=extras
-baseurl=https://mirrors.aliyun.com/rockylinux/$releasever/extras/$basearch/os
-        http://mirrors.163.com/rocky/$releasever/extras/$basearch/os
-        https://mirrors.nju.edu.cn/rocky/$releasever/extras/$basearch/os
-        https://mirrors.sjtug.sjtu.edu.cn/rocky/$releasever/extras/$basearch/os
-        http://mirrors.sdu.edu.cn/rocky/$releasever/extras/$basearch/os 
+baseurl=https://mirrors.aliyun.com/rockylinux/$releasever/extras/$basearch/os/
+        https://mirrors.163.com/rocky/$releasever/extras/$basearch/os/
+        https://mirrors.tuna.tsinghua.edu.cn/rocky/$releasever/extras/$basearch/os/
+        https://mirrors.tencent.com/rocky/$releasever/extras/$basearch/os/
+        https://mirrors.huaweicloud.com/rocky/$releasever/extras/$basearch/os/
 gpgcheck=0
 enabled=1
 
 [PowerTools]
 name=CentOS-$releasever - PowerTools
 baseurl=https://mirrors.aliyun.com/rockylinux/$releasever/PowerTools/$basearch/os/
-        http://mirrors.163.com/rocky/$releasever/PowerTools/$basearch/os/
-        http://mirrors.sdu.edu.cn/rocky/$releasever/PowerTools/$basearch/os/
-        https://mirrors.sjtug.sjtu.edu.cn/rocky/$releasever/PowerTools/$basearch/os/
-        http://mirrors.sdu.edu.cn/rocky/$releasever/PowerTools/$basearch/os/
+        https://mirrors.163.com/rocky/$releasever/PowerTools/$basearch/os/
+        https://mirrors.tuna.tsinghua.edu.cn/rocky/$releasever/PowerTools/$basearch/os/
+        https://mirrors.tencent.com/rocky/$releasever/PowerTools/$basearch/os/
+        https://mirrors.huaweicloud.com/rocky/$releasever/PowerTools/$basearch/os/ 
 gpgcheck=0
 enabled=0
 
 [epel]
 name=EPEL
-baseurl=https://mirror.tuna.tsinghua.edu.cn/epel/$releasever/Everything/$basearch
-        https://mirrors.cloud.tencent.com/epel/$releasever/Everything/$basearch
-        https://mirrors.huaweicloud.com/epel/$releasever/Everything/$basearch
-        https://mirrors.aliyun.com/epel/$releasever/Everything/$basearch
+baseurl=https://mirror.tuna.tsinghua.edu.cn/epel/$releasever/Everything/$basearch/
+        https://mirrors.cloud.tencent.com/epel/$releasever/Everything/$basearch/
+        https://mirrors.huaweicloud.com/epel/$releasever/Everything/$basearch/
+        https://mirrors.aliyun.com/epel/$releasever/Everything/$basearch/
+        https://mirrors.163.com/epel/$releasever/Everything/$basearch/
 gpgcheck=0
 enabled=1' > /etc/yum.repos.d/Rocky.repo
-        yum -y -q install sshpass bash-completion lrzsz  tree  wget tcpdump
-        yum -y -q install rsync vim lsof gcc make gcc-c++ glibc glibc-devel
+        yum -y -q install sshpass bash-completion lrzsz  tree  wget tcpdump tar
+        yum -y -q install rsync vim lsof gcc make gcc-c++ glibc glibc-devel unzip
         yum -y -q install pcre pcre-devel openssl openssl-devel systemd-devel
-        yum -y -q install zlib-devel tmux tcpdump net-tools bc chrony
+        yum -y -q install zlib-devel tmux tcpdump net-tools bc chrony zip
     elif [ ${ID} = ubuntu ];then
         mv /etc/apt/sources.list /mnt/
         echo "
-deb http://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME} main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-updates main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-backports main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-security main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME} main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-updates main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-backports main restricted universe multiverse
+deb https://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-security main restricted universe multiverse
 
-deb http://mirrors.163.com/ubuntu/ ${VERSION_CODENAME} main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ ${VERSION_CODENAME}-updates main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ ${VERSION_CODENAME}-backports main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ ${VERSION_CODENAME}-security main restricted universe multiverse
+deb https://mirrors.163.com/ubuntu/ ${VERSION_CODENAME} main restricted universe multiverse
+deb https://mirrors.163.com/ubuntu/ ${VERSION_CODENAME}-updates main restricted universe multiverse
+deb https://mirrors.163.com/ubuntu/ ${VERSION_CODENAME}-backports main restricted universe multiverse
+deb https://mirrors.163.com/ubuntu/ ${VERSION_CODENAME}-security main restricted universe multiverse
 
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ ${VERSION_CODENAME} main restricted universe multiverse
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ ${VERSION_CODENAME}-updates main restricted universe multiverse
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ ${VERSION_CODENAME}-backports main restricted universe multiverse
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ ${VERSION_CODENAME}-security main restricted universe multiverse
-
-deb http://mirrors.pku.edu.cn/ubuntu/ ${VERSION_CODENAME} main restricted universe multiverse
-deb http://mirrors.pku.edu.cn/ubuntu/ ${VERSION_CODENAME}-updates main restricted universe multiverse
-deb http://mirrors.pku.edu.cn/ubuntu/ ${VERSION_CODENAME}-backports main restricted universe multiverse
-deb http://mirrors.pku.edu.cn/ubuntu/ ${VERSION_CODENAME}-security main restricted universe multiverse
-
-deb http://mirrors.sdu.edu.cn/ubuntu/ ${VERSION_CODENAME} main restricted universe multiverse
-deb http://mirrors.sdu.edu.cn/ubuntu/ ${VERSION_CODENAME}-updates main restricted universe multiverse
-deb http://mirrors.sdu.edu.cn/ubuntu/ ${VERSION_CODENAME}-backports main restricted universe multiverse
-deb http://mirrors.sdu.edu.cn/ubuntu/ ${VERSION_CODENAME}-security main restricted universe multiverse" > /etc/apt/sources.list
+" > /etc/apt/sources.list
         apt update
-        apt -y install sshpass bash-completion lrzsz  tree 
+        apt -y install sshpass bash-completion lrzsz  tree tar zip unzip
         apt -y install wget tcpdump rsync vim lsof gcc make g++ glibc
         apt -y install libc6-dev libpcre3 libpcre3-dev openssl libssl-dev
-        apt -y install libsystemd-dev zlib-dev tmux tcpdump net-tools bc chrony
+        apt -y install libsystemd-dev zlib1g-dev tmux tcpdump net-tools bc chrony
     else
         color "请手动配置yum源" 3
         exit

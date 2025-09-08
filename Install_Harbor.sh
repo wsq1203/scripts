@@ -133,8 +133,8 @@ EOF
     #${GREEN} "Harbor密码: ${HUB_PASSWORD}"${END}
     ${GREEN} "Harbor密码: Harbor12345"${END}
     echo
-    ${GREEN}daemon.json 添加 "insecure-registries": ["${HOST}:80"]${END}
-    ${GREEN}docker login ${HOST}:80 -uadmin -pHarbor12345${END}
+    ${GREEN}daemon.json 添加 "insecure-registries": ["http://${HOST}"]${END}
+    ${GREEN}docker login http://${HOST} -uadmin -pHarbor12345${END}
     
 }
 

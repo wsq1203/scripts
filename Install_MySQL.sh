@@ -75,7 +75,7 @@ Install_mysql () {
         yum  -y install libaio numactl-libs ncurses-compat-libs
     else
         apt update
-        apt -y install libaio numactl-libs ncurses-compat-libs
+        apt -y install libaio1 numactl libnuma-dev
     fi
     
     tar xf ${MYSQL} -C /usr/local/
@@ -88,7 +88,7 @@ Install_mysql () {
     ln -s /usr/local/mysql/bin/* /usr/bin/
     cat > /etc/my.cnf <<-EOF
 [mysqld]
-server-id=`hostname -I|cut -d. -f4`
+server-id=`hostname -I|tr . ' '|awk '{print $4}'`
 log-bin
 datadir=/usr/local/mysql/data
 socket=/usr/local/mysql/mysql.sock
@@ -101,13 +101,41 @@ EOF
     mkdir /usr/local/mysql/{data,logs}
     chown -R mysql.mysql /usr/local/mysql/
     mysqld --initialize --user=mysql --datadir=/usr/local/mysql/data 
-    cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
-    chkconfig --add mysqld
-    chkconfig mysqld on
-    systemctl start mysqld
+    # cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
+    # chkconfig --add mysqld
+    # chkconfig mysqld on
+    # systemctl start mysqld
 
+cat > /etc/systemd/system/mysqld.service <<-EOF
+[Unit]
+Description=MySQL Server
+After=network.target
+
+[Service]
+User=mysql
+Group=mysql
+ExecStart=/usr/local/mysql/bin/mysqld --defaults-file=/etc/my.cnf
+Restart=on-failure
+LimitNOFILE=65535
+
+# 数据目录权限
+WorkingDirectory=/usr/local/mysql/data
+
+[Install]
+WantedBy=multi-user.target 
+EOF
+
+    systemctl daemon-reload
+    systemctl enable mysqld
+    systemctl start mysqld
+    
     [ ${?} -ne 0 ] && { color "数据库启动失败，退出!" 1 ;exit; }
     sleep 3
+
+    # ubuntu2204
+    ldd /usr/local/mysql/bin/mysqld | grep 'not found' &> /dev/null
+    [ ${?} -eq 0 ] && ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6 /usr/lib/libtinfo.so.5
+
     MYSQL_OLDPASSWORD=`awk '/A temporary password/{print $NF}' /usr/local/mysql/logs/mysql.log`
     mysqladmin  -uroot -p${MYSQL_OLDPASSWORD} password ${MYSQL_ROOT_PASSWORD} &>/dev/null
     if [ ${choice} == 'y' ];then
