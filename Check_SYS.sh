@@ -15,7 +15,7 @@ check_sys () {
     echo -e  "KERNEL:        ${RED}`uname -r`${END}"
     echo -e  "CPU:          ${RED}`lscpu|grep '^Model name'|tr -s ' '|cut -d : -f2`${END}"
     echo -e  "MEMORY:        ${RED}`free -h|grep Mem|tr -s ' ' : |cut -d : -f2`${END}"
-    echo -e  "DISK:          ${RED}`lsblk |grep -E "^(sd|nvme0n1)" |tr -s ' ' |cut -d " " -f4`${END}"
+    echo -e  "DISK:          ${RED}`lsblk |grep -E "^(sd|nvme0n1|vd)" |tr -s ' ' |cut -d " " -f4`${END}"
     ${GREEN}----------------------- sysinfo end ----------------------------------${END}
 
 }
